@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
+import Login from "./pages/Login"; 
+import Signup from "./pages/Signup";// Adjust the path based on your project structure
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <button className="text-white px-5 py-2 bg-red-500 rounded-lg">Click me </button>
-    </div>
-  )
-}
+    <>
+      <Signup />
+    </>
+  );
+};
 
-export default App
+export default App;
