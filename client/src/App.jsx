@@ -1,12 +1,27 @@
 import React from "react";
 import Login from "./pages/Login"; 
-import Signup from "./pages/Signup";// Adjust the path based on your project structure
+import HomePage from "./pages/HomePage";
+import Navbar from "./components/articles/Navbar";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
+import Signup from "./pages/Signup";
+import ChatPage from "./pages/ChatPage";
+import Currency from "./pages/Currency";
+import About from "./pages/About";
 
 const App = () => {
   return (
-    <>
-      <Signup />
-    </>
+    <div className="w-full h-screen bg-white">
+    <Router>
+      <Navbar/>
+      <Routes>
+        <Route path="/" element={<HomePage/>}/>
+        <Route path="/c" element={<ChatPage/>}/>
+        <Route path="/cr" element={<Currency/>}/>
+        <Route path="/a" element={<About/>}/>
+
+      </Routes>
+      </Router>
+    </div>
   );
 };
 
