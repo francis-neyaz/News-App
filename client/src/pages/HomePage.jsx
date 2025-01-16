@@ -28,7 +28,7 @@ const MainPage = () => {
   const newsItems = [
     {id:1, title:"Technology", content:"Latest Technology news  goes here"},
     {id:2, title:"Sports", content:"Latest sports news  goes here"},
-    { d:3, title:"Entertainment", content:"Latest Entertainment news  goes here"},
+    {id:3, title:"Entertainment", content:"Latest Entertainment news  goes here"},
     {id:4, title:"Health", content:"Latest Health news  goes here"},
     {id:5, title:"Business", content:"Latest Business news  goes here"},
     {id:6, title:"Science", content:"Latest Science news  goes here"},
