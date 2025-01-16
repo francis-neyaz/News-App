@@ -9,6 +9,12 @@ import CurrenciesPage from "./pages/CurrenciesPage";
 import About from "./pages/About";
 
 const App = () => {
+
+
+
+
+
+  
   return (
     <div className="w-full h-screen bg-white">
     <Router>

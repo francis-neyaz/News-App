@@ -1,8 +1,15 @@
 import React from "react";
+import Card from "./Card";
 
 const Feed = ({ news }) => {
+
+
+
+
+
+
   return (
-    <div className="flex-grow p-6 bg-white rounded-lg">
+    <div className="flex-grow p-6 bg-white rounded-lg">      
       {news ? (
         <>
           <h2 className="text-2xl font-semibold mb-4">{news.title}</h2>
