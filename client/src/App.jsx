@@ -8,6 +8,7 @@ import ChatPage from "./pages/ChatPage";
 import CurrenciesPage from "./pages/CurrenciesPage";
 import About from "./pages/About";
 import NewsChatSidebar from "./components/articles/NewsChatSidebar"
+import NotFound from "./pages/NotFound";
 
 
 const App = () => {
@@ -22,11 +23,18 @@ const App = () => {
     <Router>
       <Navbar/>
       <Routes>
-        <Route path="/" element={<HomePage/>}/>
+       {/* <Route path="/" element={<HomePage/>}/>
         <Route path="/c" element={<ChatPage/>}/>
         <Route path="/cr" element={<CurrenciesPage/>}/>
         <Route path="/a" element={<About/>}/>
         <Route path="/crr" element={<NewsChatSidebar/>}/>
+        */}
+        
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        {/* 404 Route (This should be the last route) */}
+        <Route path="*" element={<NotFound />} />
+      
       </Routes>
       </Router>
     </div>
