@@ -2,7 +2,6 @@ import React from "react";
 import { FaComments } from "react-icons/fa";
 
 
-
 const Card = ({ title, description, url, urlToImage, category, date, comments, readTime  }) => {
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden w-80 m-5">
