@@ -1,4 +1,3 @@
-// src/Components/Signup.js
 import React from "react";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { BiLogoFacebook } from "react-icons/bi";
@@ -9,29 +8,24 @@ const Signup = () => {
       <div className="md:w-1/3 max-w-sm">
         <img
           src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-          alt="Sample image"
-        />
+          alt="Sample image"/>
       </div>
       <div className="md:w-1/3 max-w-sm">
         <div className="text-center md:text-left">
           <label className="mr-1">Sign up with</label>
           <button
             type="button"
-            className="mx-1 h-9 w-9 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-[0_4px_9px_-4px_#3b71ca]"
-          >
+            className="mx-1 h-9 w-9 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-[0_4px_9px_-4px_#3b71ca]">
             <BiLogoFacebook
               size={20}
-              className="flex justify-center items-center w-full"
-            />
+              className="flex justify-center items-center w-full"/>
           </button>
           <button
             type="button"
-            className="inlne-block mx-1 h-9 w-9 rounded-full bg-blue-600 hover:bg-blue-700 uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca]"
-          >
+            className="inlne-block mx-1 h-9 w-9 rounded-full bg-blue-600 hover:bg-blue-700 uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca]">
             <AiOutlineTwitter
               size={20}
-              className="flex justify-center items-center w-full"
-            />
+              className="flex justify-center items-center w-full"/>
           </button>
         </div>
         <div className="my-5 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
@@ -42,23 +36,19 @@ const Signup = () => {
         <input
           className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
           type="text"
-          placeholder="Full Name"
-        />
+          placeholder="Full Name"/>
         <input
           className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
           type="email"
-          placeholder="Email Address"
-        />
+          placeholder="Email Address"/>
         <input
           className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
           type="password"
-          placeholder="Password"
-        />
+          placeholder="Password"/>
         <input
           className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
           type="password"
-          placeholder="Confirm Password"
-        />
+          placeholder="Confirm Password"/>
         <div className="mt-4 flex justify-between font-semibold text-sm">
           <label className="flex text-slate-500 hover:text-slate-600 cursor-pointer">
             <input className="mr-1" type="checkbox" />
@@ -68,8 +58,7 @@ const Signup = () => {
         <div className="text-center md:text-left">
           <button
             className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
-            type="submit"
-          >
+            type="submit">
             Signup
           </button>
         </div>
@@ -77,8 +66,7 @@ const Signup = () => {
           Already have an account?{" "}
           <a
             className="text-red-600 hover:underline hover:underline-offset-4"
-            href="#"
-          >
+            href="#">
             Login
           </a>
         </div>

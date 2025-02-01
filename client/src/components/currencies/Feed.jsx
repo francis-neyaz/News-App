@@ -44,7 +44,6 @@ const Feed = ({ selectedCurrency }) => {
     ],
   };
 
-  // Chart options
   const options = {
     plugins: {
       title: {

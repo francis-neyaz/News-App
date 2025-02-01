@@ -13,8 +13,7 @@ const CurrenciesPage = () => {
       <Sidebar
         currencies={currencies}
         onCurrencyClick={(currency) => setSelectedCurrency(currency)}
-        selectedCurrency={selectedCurrency}
-      />
+        selectedCurrency={selectedCurrency}/>
       <Feed selectedCurrency={selectedCurrency} />
     </div>
   );
