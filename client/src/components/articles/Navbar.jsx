@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const navItems = [
     { id: 1, title: "Home Page", path: "/" },
-    { id: 2, title: "News Chat", path: "/c" },
     { id: 3, title: "Currencies", path: "/cr" },
     { id: 4, title: "About", path: "/a" },
   ];

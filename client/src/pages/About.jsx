@@ -1,5 +1,7 @@
 import React from "react";
 
+
+
 const About = () => {
   return (
     <section className="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-16 px-8">

@@ -8,20 +8,17 @@ const Login = () => {
       <div className="md:w-1/3 max-w-sm">
         <img
           src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-          alt="Sample image"
-        />
+          alt="Sample image"/>
       </div>
       <div className="md:w-1/3 max-w-sm">
         <div className="text-center md:text-left">
           <label className="mr-1">Sign in with</label>
           <button
             type="button"
-            className="mx-1 h-9 w-9 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-[0_4px_9px_-4px_#3b71ca]"
-          >
+            className="mx-1 h-9 w-9 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-[0_4px_9px_-4px_#3b71ca]">
             <BiLogoFacebook
               size={20}
-              className="flex justify-center items-center w-full"
-            />
+              className="flex justify-center items-center w-full"/>
           </button>
           <button
             type="button"
