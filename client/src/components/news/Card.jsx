@@ -5,7 +5,7 @@ const Card = ({ title, description, url, urlToImage, category, date, comments, r
   const fallbackImage = "/images/FLASH.png";
 
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden w-80 m-5">
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden w-full max-w-xs mx-auto m-6">
       <div className="relative">
         <img
           src={urlToImage || fallbackImage}
@@ -26,7 +26,7 @@ const Card = ({ title, description, url, urlToImage, category, date, comments, r
           </span>
         )}
 
-        <h3 className="font-bold text-lg mt-2 text-blue-500">{title}</h3>
+        <h3 className="font-bold text-lg mt-2 text-black-500">{title}</h3>
         <p className="text-gray-600 text-sm mt-1">{description}</p>
 
         <div className="flex items-center text-gray-500 text-xs mt-3">

@@ -19,7 +19,7 @@ const [isAuth, setIsAuth]=useState(false);
 
 if(!isAuth) return <Signup setIsAuth={setIsAuth}/>
   return (
-    <div className="w-full h-screen bg-white">
+    <div className="w-full h-screen bg-black overflow-y-auto">
       {
  <Router>
       <Navbar/>

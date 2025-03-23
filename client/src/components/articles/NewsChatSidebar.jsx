@@ -14,9 +14,9 @@ const NewsChatSidebar = () => {
   ];
 
   return (
-    <div className="flex flex-col w-64 h-screen bg-gray-800 text-white shadow-lg">
+    <div className="flex flex-col w-64 h-screen bg-gradient-to-r from-yellow-300 to-red-500 text-black shadow-lg">
       {/* Header Section */}
-      <div className="flex items-center justify-between px-4 py-3 bg-gray-900">
+      <div className="flex items-center justify-between px-4 py-3 bg-gray==-900">
         <h1 className="text-lg font-bold">News Chat</h1>
         <button className="text-gray-400 hover:text-white">➖</button>
       </div>
@@ -83,7 +83,7 @@ const NewsChatSidebar = () => {
 
       {/* Quick Actions */}
       <div className="px-4 py-3 bg-gray-900">
-        <button className="w-full px-4 py-2 text-sm font-bold bg-blue-600 rounded hover:bg-blue-700">
+        <button className="w-full px-4 py-2 text-sm font-bold bg-gradient-to-r from-yellow-300 to-red-500  rounded hover:bg-blue-700">
           Share News Link
         </button>
       </div>

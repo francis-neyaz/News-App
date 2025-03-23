@@ -10,7 +10,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 px-6 flex justify-between items-center shadow-lg rounded-lg">
+    <nav className="bg-gradient-to-r from-yellow-500 to-red-600 text-black py-4 px-6 flex justify-between items-center shadow-lg rounded-lg">
       {/* Brand Logo */}
       <div className="text-3xl font-bold cursor-pointer hover:text-gray-200 transition duration-300">
         Flash News

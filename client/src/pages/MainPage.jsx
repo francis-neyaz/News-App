@@ -32,7 +32,7 @@ const MainPage = () => {
   };
 
   return (
-    <div className="flex h-screen gap-2 m-2">
+    <div className="flex h-screen bg-black gap-2 m-2">
       <Sidebar newsItems={newsItems} onNewsClick={handleNewsClick} />
       <Feed news={selectedNews} />
     </div>
