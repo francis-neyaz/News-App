@@ -1,11 +1,23 @@
 import React from "react";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { BiLogoFacebook } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Signup = ({setIsAuth}) => {
 
-const signIn=()=>{
+const [name, setName]=useState("");
+const [email, setEmail]=useState();
+const [password, setPassword]=useState();
+const [confirmPassword, setConfirmPassword]=useState();
+
+
+
+
+
+const signIn = async()=>{
+
+
+
   setIsAuth(true);
 }
 
@@ -14,8 +26,7 @@ const signIn=()=>{
     <section className="h-screen bg-white flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
       <div className="md:w-1/3 max-w-sm">
         <img
-          src="/images/FLASH.png"
-          />
+          src="/images/FLASH.png"/>
       </div>
       <div className="md:w-1/3 max-w-sm">
         <div className="text-center md:text-left">

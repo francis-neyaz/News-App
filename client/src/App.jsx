@@ -4,7 +4,7 @@ import MainPage from "./pages/MainPage";
 import Navbar from "./components/articles/Navbar";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import Signup from "./pages/Signup";
-import ChatPage from "./pages/ChatPage";
+//import ChatPage from "./pages/ChatPage";
 import CurrenciesPage from "./pages/CurrenciesPage";
 import About from "./pages/About";
 import NewsChatSidebar from "./components/articles/NewsChatSidebar"
@@ -25,7 +25,6 @@ if(!isAuth) return <Signup setIsAuth={setIsAuth}/>
       <Navbar/>
       <Routes>
         <Route path="/" element={<MainPage/>}/>
-        <Route path="/c" element={<ChatPage/>}/>
         <Route path="/cr" element={<CurrenciesPage/>}/>
         <Route path="/a" element={<About/>}/>
         <Route path="/crr" element={<NewsChatSidebar/>}/>
@@ -33,7 +32,6 @@ if(!isAuth) return <Signup setIsAuth={setIsAuth}/>
         <Route path="/l" element={<Login/>}/>
       </Routes>
       </Router>
-  
     }
     </div>
   );

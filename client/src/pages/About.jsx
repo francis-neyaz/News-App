@@ -1,6 +1,8 @@
 import React from "react";
 import { FaLinkedin, FaTwitter, FaWhatsapp } from "react-icons/fa";
 
+
+
 const About = () => {
   return (
     <section className=" text-white py-16 px-8">
