@@ -39,8 +39,8 @@ const About = () => {
                 alt="Creator 1" 
                 className="w-24 h-24 mx-auto rounded-full"
               />
-              <h4 className="text-xl font-semibold mt-4">Neyazuddin</h4>
-              <p className="text-sm">Founder & Developer</p>
+              <h4 className="text-xl font-semibold mt-4">Neyaz uddin</h4>
+              <p className="text-sm">Developer</p>
               <div className="flex justify-center gap-4 mt-3">
                 <a href="https://www.linkedin.com/in/neyazuddin" target="_blank" className="text-blue-700 text-xl">
                   <FaLinkedin />
@@ -58,8 +58,8 @@ const About = () => {
                 alt="Creator 2" 
                 className="w-24 h-24 mx-auto rounded-full"
               />
-              <h4 className="text-xl font-semibold mt-4">John Doe</h4>
-              <p className="text-sm">Co-Founder & Designer</p>
+              <h4 className="text-xl font-semibold mt-4">Francis</h4>
+              <p className="text-sm">Backend Developer</p>
               <div className="flex justify-center gap-4 mt-3">
                 <a href="https://www.linkedin.com/in/johndoe" target="_blank" className="text-blue-700 text-xl">
                   <FaLinkedin />

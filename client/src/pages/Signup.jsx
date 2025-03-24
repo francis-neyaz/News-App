@@ -23,7 +23,7 @@ const signIn = async()=>{
 
 
   return (
-    <section className="h-screen bg-white flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
+    <section className="h-full w-full bg-gradient-to-r from-yellow-500 to-red-600  flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
       <div className="md:w-1/3 max-w-sm">
         <img
           src="/images/FLASH.png"/>
@@ -75,7 +75,7 @@ const signIn = async()=>{
         </div>
         <div className="text-center md:text-left">
           <button onClick={signIn}
-            className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
+            className="mt-4 bg-black hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
             type="submit">
             Signup
           </button>
@@ -84,7 +84,7 @@ const signIn = async()=>{
           Already have an account?{" "}
           <a
           href="/l"
-            className="text-red-600 hover:underline hover:underline-offset-4">Login
+            className="text-black hover:underline hover:underline-offset-4">Login
           </a>
         </div>
       </div>
