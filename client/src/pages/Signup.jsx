@@ -1,95 +1,230 @@
-import React from "react";
-import { AiOutlineTwitter } from "react-icons/ai";
-import { BiLogoFacebook } from "react-icons/bi";
-import { useState } from "react";
+// pages/Signup.js
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { AiOutlineTwitter } from 'react-icons/ai';
+import { BiLogoFacebook } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import api from '../services/api';
 
-const Signup = ({setIsAuth}) => {
+const Signup = ({ setIsAuth }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const [errors, setErrors] = useState({});
+  const [termsAgreed, setTermsAgreed] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
 
-const [name, setName]=useState("");
-const [email, setEmail]=useState();
-const [password, setPassword]=useState();
-const [confirmPassword, setConfirmPassword]=useState();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: '' });
+  };
 
+  const handleTermsChange = (e) => {
+    setTermsAgreed(e.target.checked);
+    setErrors({ ...errors, terms: '' });
+  };
 
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = {};
 
+    if (!formData.name.trim()) {
+      newErrors.name = 'Full name is required';
+      isValid = false;
+    }
 
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Invalid email format';
+      isValid = false;
+    }
 
-const signIn = async()=>{
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+      isValid = false;
+    } else if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+      isValid = false;
+    }
 
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = 'Please confirm your password';
+      isValid = false;
+    } else if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+      isValid = false;
+    }
 
+    if (!termsAgreed) {
+      newErrors.terms = 'You must agree to the terms and conditions';
+      isValid = false;
+    }
 
-  setIsAuth(true);
-}
+    setErrors(newErrors);
+    return isValid;
+  };
 
+  const signIn = async (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      try {
+        const res = await api.post('/auth/signup', {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        });
+
+        if (res.data.success) {
+          console.log('Signup success:', res.data);
+          setIsAuth(true); // Update authentication state
+          localStorage.setItem('token', res.data.token); // Store token
+          navigate('/home'); // Redirect to home page
+        } else {
+          setErrors({ general: res.data.message || 'Signup failed. Try again.' });
+        }
+      } catch (error) {
+        console.error('Signup error:', error);
+        const errorMessage =
+          error.response?.data?.error || 'Signup failed. Please try again.';
+        setErrors({ general: errorMessage });
+      }
+    }
+  };
 
   return (
-    <section className="h-full w-full bg-gradient-to-r from-yellow-500 to-red-600  flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
-      <div className="md:w-1/3 max-w-sm">
-        <img
-          src="/images/FLASH.png"/>
-      </div>
-      <div className="md:w-1/3 max-w-sm">
-        <div className="text-center md:text-left">
-          <label className="mr-1">Sign up with</label>
-          <button
-            type="button"
-            className="mx-1 h-9 w-9 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-[0_4px_9px_-4px_#3b71ca]">
-            <BiLogoFacebook
-              size={20}
-              className="flex justify-center items-center w-full"/>
-          </button>
-          <button
-            type="button"
-            className="inlne-block mx-1 h-9 w-9 rounded-full bg-blue-600 hover:bg-blue-700 uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca]">
-            <AiOutlineTwitter
-              size={20}
-              className="flex justify-center items-center w-full"/>
-          </button>
+    <section className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 flex items-center justify-center p-4">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-16 bg-black bg-opacity-20 rounded-2xl p-8 shadow-2xl max-w-4xl w-full"
+      >
+        <motion.div
+          className="md:w-1/2 max-w-md"
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: 'spring', stiffness: 300 }}
+        >
+          <img
+            src="/images/FLASH.png"
+            alt="Futuristic illustration"
+            className="rounded-lg shadow-lg"
+          />
+        </motion.div>
+
+        <div className="md:w-1/2 max-w-md">
+          <div className="text-center md:text-left mb-6">
+            <label className="text-white text-lg font-semibold">Sign up with</label>
+            <div className="flex justify-center md:justify-start space-x-4 mt-2">
+              <motion.button
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                whileTap={{ scale: 0.9 }}
+                className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 text-white flex items-center justify-center shadow-lg"
+              >
+                <BiLogoFacebook size={24} />
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.2, rotate: -5 }}
+                whileTap={{ scale: 0.9 }}
+                className="h-10 w-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white flex items-center justify-center shadow-lg"
+              >
+                <AiOutlineTwitter size={24} />
+              </motion.button>
+            </div>
+          </div>
+
+          <div className="my-6 flex items-center">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent to-white"></div>
+            <p className="mx-4 text-white font-semibold">Or</p>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent to-white"></div>
+          </div>
+
+          <form onSubmit={signIn}>
+            <div className="mb-4">
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-transparent border border-purple-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-pink-500"
+                placeholder="Full Name"
+              />
+              {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+            </div>
+
+            <div className="mb-4">
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-transparent border border-purple-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-pink-500"
+                placeholder="Email Address"
+              />
+              {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
+            </div>
+
+            <div className="mb-4">
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-transparent border border-purple-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-pink-500"
+                placeholder="Password"
+              />
+              {errors.password && <p className="text-red-400 text-xs mt-1">{errors.password}</p>}
+            </div>
+
+            <div className="mb-4">
+              <input
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-transparent border border-purple-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-pink-500"
+                placeholder="Confirm Password"
+              />
+              {errors.confirmPassword && (
+                <p className="text-red-400 text-xs mt-1">{errors.confirmPassword}</p>
+              )}
+            </div>
+
+            <div className="mb-4 text-sm text-white">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={termsAgreed}
+                  onChange={handleTermsChange}
+                  className="mr-2 accent-pink-500"
+                />
+                I agree to the <span className="underline ml-1">terms and conditions</span>
+              </label>
+              {errors.terms && <p className="text-red-400 text-xs mt-1">{errors.terms}</p>}
+            </div>
+
+            {errors.general && (
+              <p className="text-red-400 text-sm mb-4">{errors.general}</p>
+            )}
+
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-all"
+            >
+              Sign Up
+            </button>
+          </form>
         </div>
-        <div className="my-5 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-          <p className="mx-4 mb-0 text-center font-semibold text-slate-500">
-            Or
-          </p>
-        </div>
-        <input
-          className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
-          type="text"
-          placeholder="Full Name"/>
-        <input
-          className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
-          type="email"
-          placeholder="Email Address"/>
-        <input
-          className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
-          type="password"
-          placeholder="Password"/>
-        <input
-          className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
-          type="password"
-          placeholder="Confirm Password"/>
-        <div className="mt-4 flex justify-between font-semibold text-sm">
-          <label className="flex text-slate-500 hover:text-slate-600 cursor-pointer">
-            <input className="mr-1" type="checkbox" />
-            <span>I agree to the terms and conditions</span>
-          </label>
-        </div>
-        <div className="text-center md:text-left">
-          <button onClick={signIn}
-            className="mt-4 bg-black hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
-            type="submit">
-            Signup
-          </button>
-        </div>
-        <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
-          Already have an account?{" "}
-          <a
-          href="/l"
-            className="text-black hover:underline hover:underline-offset-4">Login
-          </a>
-        </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
 
 export default Signup;
+
+

@@ -5,7 +5,7 @@ import { FaLinkedin, FaTwitter, FaWhatsapp } from "react-icons/fa";
 
 const About = () => {
   return (
-    <section className=" text-white py-16 px-8">
+    <section className=" bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 text-white py-16 px-8">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-4xl font-bold mb-4">About NEWS-APP</h2>
         <p className="text-lg mb-6">
