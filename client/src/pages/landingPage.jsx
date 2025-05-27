@@ -1,32 +1,31 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-// ✅ Correct:
-import { AiOutlineTwitter } from 'react-icons/ai';
-import { BiLogoFacebook } from 'react-icons/bi';
+import { AiOutlineTwitter, AiOutlineThunderbolt, AiOutlineBell } from 'react-icons/ai';
+import { BiLogoFacebook, BiNews } from 'react-icons/bi';
+import { MdOutlineOfflinePin } from 'react-icons/md';
 
-
-const landingPage = () => {
+const LandingPage = () => {
   const features = [
     {
       title: 'Real-Time Breaking News',
       description: 'Stay ahead with instant updates on global events as they happen.',
-      icon: '⚡',
+      icon: <AiOutlineThunderbolt size={40} className="text-pink-400" />,
     },
     {
       title: 'Personalized News Feed',
       description: 'Tailored content based on your interests and reading habits.',
-      icon: '📰',
+      icon: <BiNews size={40} className="text-purple-400" />,
     },
     {
       title: 'Push Notifications',
       description: 'Get alerted to breaking news and top stories instantly.',
-      icon: '🔔',
+      icon: <AiOutlineBell size={40} className="text-cyan-400" />,
     },
     {
       title: 'Offline Reading',
       description: 'Save articles to read anytime, even without internet.',
-      icon: '📚',
+      icon: <MdOutlineOfflinePin size={40} className="text-indigo-400" />,
     },
   ];
 
@@ -44,32 +43,27 @@ const landingPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-blue-950 to-blue-900 text-white">
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center min-h-screen px-4 py-16">
+      <section className="flex flex-col items-center justify-center min-h-screen px-4 py-16 text-center">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="text-center"
         >
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
+          <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-400">
             Flash News
           </h1>
           <p className="mt-4 text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto">
             Your ultimate source for real-time, personalized news delivered with speed and style.
           </p>
-          <motion.div
-            className="mt-8 flex justify-center space-x-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
+
+          <div className="mt-8 flex justify-center gap-4 flex-wrap">
             <Link to="/signup">
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(236, 72, 153, 0.7)' }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold tracking-wider shadow-lg"
+                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold shadow-lg"
               >
                 Get Started
               </motion.button>
@@ -77,11 +71,11 @@ const landingPage = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-transparent border border-purple-500 text-white py-3 px-6 rounded-lg font-semibold"
+              className="border border-purple-500 py-3 px-6 rounded-lg font-semibold text-white"
             >
               Learn More
             </motion.button>
-          </motion.div>
+          </div>
         </motion.div>
       </section>
 
@@ -93,23 +87,22 @@ const landingPage = () => {
           transition={{ duration: 0.8 }}
           className="max-w-6xl mx-auto text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold">Why Choose Flash News?</h2>
-          <p className="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Why Choose Flash News?</h2>
+          <p className="text-lg text-gray-300 mb-12 max-w-3xl mx-auto">
             Discover the features that make Flash News the go-to app for staying informed.
           </p>
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.5 }}
-                className="bg-black bg-opacity-20 p-6 rounded-lg shadow-lg relative"
+                className="bg-blue-900 p-6 rounded-xl shadow-md text-left hover:shadow-lg transition"
               >
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold">{feature.title}</h3>
-                <p className="mt-2 text-gray-300">{feature.description}</p>
-                <div className="absolute inset-0 -z-10 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg blur-lg"></div>
+                <div className="mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-300">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -132,7 +125,7 @@ const landingPage = () => {
                 initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.5 }}
-                className="bg-black bg-opacity-40 p-6 rounded-lg shadow-lg"
+                className="bg-blue-800 p-6 rounded-lg shadow-lg"
               >
                 <p className="text-gray-200 italic">"{testimonial.quote}"</p>
                 <p className="mt-4 font-semibold">{testimonial.name}</p>
@@ -143,7 +136,7 @@ const landingPage = () => {
         </motion.div>
       </section>
 
-      {/* CTA Section */}
+      {/* Call to Action */}
       <section className="py-16 px-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -151,55 +144,49 @@ const landingPage = () => {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold">
-            Join the News Revolution
-          </h2>
-          <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Join the News Revolution</h2>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
             Sign up now to experience news like never before with Flash News.
           </p>
-          <motion.div className="mt-8 flex justify-center space-x-4">
+          <div className="flex flex-wrap justify-center items-center gap-4">
             <Link to="/signup">
               <motion.button
-                whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(236, 72, 153, 0.7)' }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold tracking-wider shadow-lg"
+                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold shadow-lg"
               >
                 Sign Up Now
               </motion.button>
             </Link>
-            <div className="flex space-x-4">
-              <motion.a
-                href="https://facebook.com"
-                whileHover={{ scale: 1.2 }}
-                className="text-white"
-              >
-                <BiLogoFacebook size={32} />
-              </motion.a>
-              <motion.a
-                href="https://twitter.com"
-                whileHover={{ scale: 1.2 }}
-                className="text-white"
-              >
-                <AiOutlineTwitter size={32} />
-              </motion.a>
-            </div>
-          </motion.div>
+            <motion.a
+              href="https://facebook.com"
+              whileHover={{ scale: 1.2 }}
+              className="text-white"
+            >
+              <BiLogoFacebook size={32} />
+            </motion.a>
+            <motion.a
+              href="https://twitter.com"
+              whileHover={{ scale: 1.2 }}
+              className="text-white"
+            >
+              <AiOutlineTwitter size={32} />
+            </motion.a>
+          </div>
         </motion.div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 bg-black bg-opacity-50 text-center">
-        <p className="text-gray-400">
-          &copy; 2025 Flash News. All rights reserved.
-        </p>
-        <div className="mt-4">
-          <Link to="/login" className="text-pink-400 hover:text-pink-300 mx-2">
+      <footer className="py-8 px-4 bg-black bg-opacity-50 text-center text-gray-400">
+        <p>&copy; 2025 Flash News. All rights reserved.</p>
+        <div className="mt-4 space-x-4">
+          <Link to="/login" className="text-pink-400 hover:text-pink-300">
             Login
           </Link>
-          <Link to="/signup" className="text-pink-400 hover:text-pink-300 mx-2">
+          <Link to="/signup" className="text-pink-400 hover:text-pink-300">
             Signup
           </Link>
-          <Link to="/about" className="text-pink-400 hover:text-pink-300 mx-2">
+          <Link to="/about" className="text-pink-400 hover:text-pink-300">
             About
           </Link>
         </div>
@@ -208,4 +195,4 @@ const landingPage = () => {
   );
 };
 
-export default landingPage;
+export default LandingPage;
