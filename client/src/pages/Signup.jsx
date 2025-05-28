@@ -77,15 +77,13 @@ const Signup = ({ setIsAuth }) => {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}
-        className="flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-12 bg-black bg-opacity-30 rounded-2xl p-8 shadow-2xl max-w-4xl w-full"
-      >
+        className="flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-12 bg-black bg-opacity-30 rounded-2xl p-8 shadow-2xl max-w-4xl w-full">
         <motion.img
           src="/images/FLASH.png"
           alt="Futuristic illustration"
           whileHover={{ scale: 1.05 }}
           transition={{ type: 'spring', stiffness: 300 }}
-          className="rounded-lg shadow-lg w-full md:w-1/2"
-        />
+          className="rounded-lg shadow-lg w-full md:w-1/2"/>
 
         <div className="md:w-1/2 w-full">
           <div className="text-center md:text-left mb-6">

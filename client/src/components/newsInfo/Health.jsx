@@ -12,7 +12,7 @@ const Health= () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await axios.get("http://localhost:5000/news/health");
+        const response = await axios.get("http://localhost:5000/api/health");
         setArticles(response.data);
       } catch (error) {
         console.error("Error fetching news:", error);

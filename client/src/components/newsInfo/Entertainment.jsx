@@ -12,7 +12,7 @@ const Entertainment = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await axios.get("http://localhost:5000/news/entertainment");
+        const response = await axios.get("http://localhost:5000/api/entertainment");
         setArticles(response.data);
       } catch (error) {
         console.error("Error fetching news:", error);

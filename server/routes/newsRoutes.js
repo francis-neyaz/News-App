@@ -1,17 +1,10 @@
-const express = require("express");
-const { fetchNews } = require("../controllers/newsController");
 
+const express = require('express');
 const router = express.Router();
+const { getNews } = require('../controllers/newsController');
 
-router.get("/:category", fetchNews);
+// GET /api/news
+router.get('/news', getNews);
 
 module.exports = router;
-
-
-
-
-
-
-
-
 

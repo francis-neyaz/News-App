@@ -12,7 +12,7 @@ const Technology = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await axios.get("http://localhost:5000/news/technology");
+        const response = await axios.get("http://localhost:5000/api/technology");
         setArticles(response.data);
       } catch (error) {
         console.error("Error fetching news:", error);

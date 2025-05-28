@@ -1,3 +1,4 @@
+
 import express from 'express';
 import cors from 'cors';
 import bcrypt from 'bcrypt';
@@ -5,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import { User } from './models/User.js';
+import newsRoutes from "./routes/newsRoutes.js"
 
 dotenv.config();
 console.log('MONGO_URI:', process.env.MONGO_URI); // Debug
@@ -81,6 +83,7 @@ app.post('/api/auth/login', async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 });
+app.use('/api', newsRoutes);
 
 // Protected route
 app.post('/api/predict', async (req, res) => {
@@ -98,5 +101,8 @@ app.post('/api/predict', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.use('/api', newsRoutes);
+
+
+

@@ -12,7 +12,7 @@ const Science= () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await axios.get("http://localhost:5000/news/science");
+        const response = await axios.get("http://localhost:5000/api/science");
         setArticles(response.data);
       } catch (error) {
         console.error("Error fetching news:", error);
