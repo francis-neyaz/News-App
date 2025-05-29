@@ -1,0 +1,9 @@
+[build]
+  base = "frontend"                # Set base to frontend subdirectory
+  command = "npm run build"        # Run build in frontend/
+  publish = "build"                # Publish frontend/build (or dist for Vite)
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200                     # For React SPA routing
