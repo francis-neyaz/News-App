@@ -7,33 +7,42 @@ import connectDB from './config/db.js';
 import { User } from './models/User.js';
 
 dotenv.config();
-console.log('MONGO_URI:', process.env.MONGO_URI); // Debug
-console.log('PORT:', process.env.PORT); // Debug
-console.log('JWT_SECRET:', process.env.JWT_SECRET); // Debug
+('MONGO_URI:', process.env.MONGO_URI);
+('PORT:', process.env.PORT);
+('JWT_SECRET:', process.env.JWT_SECRET);
 
 connectDB();
 
 const app = express();
 
-// Log all requests
+// Log all incoming requests
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   next();
 });
 
+// ✅ CORS configuration to allow both 5173 and 5174
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174'];
+
 app.use(
   cors({
-    origin: 'http://localhost:5174',
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   })
 );
-app.options('*', cors());
 
+// Parse JSON requests
 app.use(express.json());
 
-// Register
+// Register route
 app.post('/api/auth/signup', async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -59,7 +68,7 @@ app.post('/api/auth/signup', async (req, res) => {
   }
 });
 
-// Login
+// Login route
 app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
