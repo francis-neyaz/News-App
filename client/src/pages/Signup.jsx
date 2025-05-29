@@ -6,30 +6,35 @@ import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 
 const InputField = ({ name, type, placeholder, value, onChange, error }) => (
-  <div className="mb-4">
+  <div className="mb-4 relative">
     <input
       name={name}
       type={type}
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className="w-full px-4 py-3 bg-transparent border border-purple-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-pink-500"
+      className="w-full px-4 py-3 bg-transparent border border-purple-500 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-300"
     />
     {error && <p className="text-red-400 text-xs mt-1">{error}</p>}
+    <div className="absolute inset-0 -z-10 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg blur-lg"></div>
   </div>
 );
 
 const Signup = ({ setIsAuth }) => {
   const [formData, setFormData] = useState({
-    name: '', email: '', password: '', confirmPassword: ''
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
   const [termsAgreed, setTermsAgreed] = useState(false);
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = ({ target: { name, value } }) => {
     setFormData({ ...formData, [name]: value });
-    setErrors(prev => ({ ...prev, [name]: '' }));
+    setErrors((prev) => ({ ...prev, [name]: '', general: '' }));
   };
 
   const validateForm = () => {
@@ -41,7 +46,7 @@ const Signup = ({ setIsAuth }) => {
     if (!email) newErrors.email = 'Email is required';
     else if (!isEmail) newErrors.email = 'Invalid email format';
     if (!password) newErrors.password = 'Password is required';
-    else if (password.length < 6) newErrors.password = 'Minimum 6 characters';
+    else if (password.length < 4) newErrors.password = 'Minimum 4 characters'; // Aligned with backend
     if (!confirmPassword) newErrors.confirmPassword = 'Confirm your password';
     else if (password !== confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
     if (!termsAgreed) newErrors.terms = 'You must agree to terms';
@@ -50,24 +55,30 @@ const Signup = ({ setIsAuth }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const signIn = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
+
+    setLoading(true);
+    setErrors((prev) => ({ ...prev, general: '' }));
 
     try {
       const { name, email, password } = formData;
       const res = await api.post('/auth/signup', { name, email, password });
 
       if (res.data.success) {
-        setIsAuth(true);
         localStorage.setItem('token', res.data.token);
+        setIsAuth(true);
         navigate('/home');
       } else {
-        setErrors({ general: res.data.message || 'Signup failed.' });
+        setErrors({ general: res.data.error || 'Signup failed.' });
       }
     } catch (err) {
+      console.error('Signup error:', err);
       const message = err.response?.data?.error || 'Signup failed. Please try again.';
       setErrors({ general: message });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -77,13 +88,15 @@ const Signup = ({ setIsAuth }) => {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}
-        className="flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-12 bg-black bg-opacity-30 rounded-2xl p-8 shadow-2xl max-w-4xl w-full">
+        className="flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-12 bg-black bg-opacity-30 rounded-2xl p-8 shadow-2xl max-w-4xl w-full"
+      >
         <motion.img
-          src="/images/FLASH.png"
+          src="/FLASH.png" // Ensure this exists in public/FLASH.png
           alt="Futuristic illustration"
           whileHover={{ scale: 1.05 }}
           transition={{ type: 'spring', stiffness: 300 }}
-          className="rounded-lg shadow-lg w-full md:w-1/2"/>
+          className="rounded-lg shadow-lg w-full md:w-1/2"
+        />
 
         <div className="md:w-1/2 w-full">
           <div className="text-center md:text-left mb-6">
@@ -96,11 +109,39 @@ const Signup = ({ setIsAuth }) => {
 
           <Divider text="Or" />
 
-          <form onSubmit={signIn}>
-            <InputField name="name" type="text" placeholder="Full Name" value={formData.name} onChange={handleChange} error={errors.name} />
-            <InputField name="email" type="email" placeholder="Email Address" value={formData.email} onChange={handleChange} error={errors.email} />
-            <InputField name="password" type="password" placeholder="Password" value={formData.password} onChange={handleChange} error={errors.password} />
-            <InputField name="confirmPassword" type="password" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} error={errors.confirmPassword} />
+          <form onSubmit={handleSignup}>
+            <InputField
+              name="name"
+              type="text"
+              placeholder="Full Name"
+              value={formData.name}
+              onChange={handleChange}
+              error={errors.name}
+            />
+            <InputField
+              name="email"
+              type="email"
+              placeholder="Email Address"
+              value={formData.email}
+              onChange={handleChange}
+              error={errors.email}
+            />
+            <InputField
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              error={errors.password}
+            />
+            <InputField
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              error={errors.confirmPassword}
+            />
 
             <div className="mb-4 text-sm text-white">
               <label className="flex items-center">
@@ -109,7 +150,7 @@ const Signup = ({ setIsAuth }) => {
                   checked={termsAgreed}
                   onChange={(e) => {
                     setTermsAgreed(e.target.checked);
-                    setErrors(prev => ({ ...prev, terms: '' }));
+                    setErrors((prev) => ({ ...prev, terms: '' }));
                   }}
                   className="mr-2 accent-pink-500"
                 />
@@ -122,12 +163,20 @@ const Signup = ({ setIsAuth }) => {
               <p className="text-red-400 text-sm mb-4 text-center">{errors.general}</p>
             )}
 
-            <button
+            <motion.button
+              whileHover={{
+                scale: loading ? 1 : 1.05,
+                boxShadow: loading ? 'none' : '0 0 20px rgba(236, 72, 153, 0.7)',
+              }}
+              whileTap={{ scale: loading ? 1 : 0.95 }}
               type="submit"
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-all"
+              disabled={loading}
+              className={`w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-semibold transition-all duration-300 ${
+                loading ? 'opacity-60 cursor-not-allowed' : ''
+              }`}
             >
-              Sign Up
-            </button>
+              {loading ? 'Signing up...' : 'Sign Up'}
+            </motion.button>
           </form>
         </div>
       </motion.div>

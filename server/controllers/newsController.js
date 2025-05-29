@@ -1,18 +1,21 @@
-const axios = require('axios');
-require('dotenv').config();
+// controllers/newsController.js
+import axios from 'axios';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const API_KEY = process.env.NEWS_API_KEY;
 
-const getNews = async (req, res) => {
+export const getNews = async (req, res) => {
   try {
     const { category = 'technology', country = 'us' } = req.query;
+
     const response = await axios.get(`https://newsdata.io/api/1/news`, {
       params: {
         apikey: API_KEY,
         country,
         category,
-        language: 'en'
-      }
+        language: 'en',
+      },
     });
 
     res.status(200).json(response.data);
@@ -22,4 +25,3 @@ const getNews = async (req, res) => {
   }
 };
 
-module.exports = { getNews };

@@ -1,12 +1,11 @@
-// src/components/Login.jsx
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { AiOutlineTwitter } from 'react-icons/ai';
 import { BiLogoFacebook } from 'react-icons/bi';
 import { Link, useNavigate } from 'react-router-dom';
-import api from '../services/api'; // Use the axios instance from services/api.js
+import api from '../services/api';
 
-const Login = ({ setIsAuth }) => { // Accept setIsAuth prop
+const Login = ({ setIsAuth }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({ email: '', password: '', general: '' });
@@ -16,8 +15,8 @@ const Login = ({ setIsAuth }) => { // Accept setIsAuth prop
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      setIsAuth(true); // Update isAuth state
-      navigate('/home'); // Redirect to /home, not /dashboard
+      setIsAuth(true);
+      navigate('/home');
     }
   }, [navigate, setIsAuth]);
 
@@ -42,8 +41,8 @@ const Login = ({ setIsAuth }) => { // Accept setIsAuth prop
     if (!formData.password) {
       newErrors.password = 'Password is required';
       isValid = false;
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+    } else if (formData.password.length < 4) {
+      newErrors.password = 'Password must be at least 4 characters'; // Aligned with backend
       isValid = false;
     }
 
@@ -65,14 +64,15 @@ const Login = ({ setIsAuth }) => { // Accept setIsAuth prop
       });
 
       if (response.data.success) {
-        localStorage.setItem('token', response.data.token); // Store token
-        setIsAuth(true); // Update authentication state
-        navigate('/home'); // Redirect to /home
+        localStorage.setItem('token', response.data.token);
+        setIsAuth(true);
+        navigate('/home');
       } else {
         setErrors({ general: response.data.error || 'Login failed' });
       }
     } catch (error) {
       console.error('Login error:', error);
+      console.log('Axios config:', error.config); // Debug Axios request
       const errorMessage = error.response?.data?.error || 'Login failed. Please try again.';
       setErrors({ general: errorMessage });
     } finally {
@@ -94,7 +94,7 @@ const Login = ({ setIsAuth }) => { // Accept setIsAuth prop
           transition={{ type: 'spring', stiffness: 300 }}
         >
           <img
-            src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+            src="/FLASH.png" // Use same image as Signup.jsx for consistency
             alt="Login Illustration"
             className="rounded-lg shadow-lg"
           />
@@ -185,7 +185,7 @@ const Login = ({ setIsAuth }) => { // Accept setIsAuth prop
               <label className="flex items-center">
                 <input
                   type="checkbox"
-                  className="mr-2 text-purple-500 focus:ring-purple-500"
+                  className="mr-2 accent-pink-500"
                 />
                 <span>Remember Me</span>
               </label>
