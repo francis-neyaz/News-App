@@ -49,8 +49,7 @@ const LandingPage = () => {
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-        >
+          transition={{ duration: 0.8, ease: 'easeOut' }}>
           <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-400">
             Flash News
           </h1>
@@ -63,16 +62,14 @@ const LandingPage = () => {
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(236, 72, 153, 0.7)' }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold shadow-lg"
-              >
+                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold shadow-lg">
                 Get Started
               </motion.button>
             </Link>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="border border-purple-500 py-3 px-6 rounded-lg font-semibold text-white"
-            >
+              className="border border-purple-500 py-3 px-6 rounded-lg font-semibold text-white">
               Learn More
             </motion.button>
           </div>
