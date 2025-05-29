@@ -1,9 +1,9 @@
 [build]
-  base = ""
-  command = "npm run build"
-  publish = "build"  # or dist for Vite
+  base = "frontend"
+  command = "npm install && npm run build"
+  publish = "dist"                 # Vite output directory
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
-  status = 200                  # Handle SPA routing
+  status = 200               # Handle SPA routing
