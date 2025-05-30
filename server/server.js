@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 });
 
 // CORS configuration
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174'];
+const allowedOrigins = ['https://localhost:5173', 'https://localhost:5174'];
 app.use(
   cors({
     origin: function (origin, callback) {
