@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 });
 
 // CORS configuration
-const allowedOrigins = ['https://localhost:5173', 'https://localhost:5174'];
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174'];
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -39,7 +39,7 @@ app.use(
         callback(new Error('Not allowed by CORS'));
       }
     },
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   })
@@ -91,7 +91,8 @@ app.post('/api/auth/signup', signupValidation, async (req, res) => {
 
     res.status(201).json({ success: true, message: 'Registered successfully', token });
   } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+    console.error('Signup Error:', error);
+    res.status(500).json({ success: false, error: 'Internal server error' });
   }
 });
 
@@ -114,7 +115,8 @@ app.post('/api/auth/login', loginValidation, async (req, res) => {
 
     res.status(200).json({ success: true, message: 'Login successful', token });
   } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+    console.error('Login Error:', error);
+    res.status(500).json({ success: false, error: 'Internal server error' });
   }
 });
 
